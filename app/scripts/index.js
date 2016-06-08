@@ -31,10 +31,24 @@ function displayCharacter(characterList){
 }
 
 function fetchComics(character){
-  //console.log(character);
-  $.ajax(character.resourceURI + '?' + apiKey).then(displayComics);
+  var comicUrl = character.comics.collectionURI + '?' + apiKey;
+  $.ajax(comicUrl).then(displayComics);
 }
 
-function displayComics(data){
-    console.log(data);
+function displayComics(comicResults){
+  var $modal = $('.js-modal');
+  var source = $('#comic-template').html();
+  var template = handlebars.compile(source);
+
+  // Configure a friendly context object
+  var context = {
+    'comics': comicResults.data.results,
+    'count': comicResults.data.count
+  }
+
+  // Insert comics into modal
+  $modal.find('.js-modal-content').html(template(context));
+
+  // Show Modal
+  $modal.addClass('is-active');
 }

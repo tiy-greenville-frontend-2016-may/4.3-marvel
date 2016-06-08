@@ -27,6 +27,16 @@
       </li>
     </script>
 
+    <script id="comic-template" type="text/x-handlebars-template">
+      <h1>There Are {{count}} Comics</h1>
+
+      {{#each comics}}
+        <div class="comic">
+          <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="{{title}}">
+        </div>
+      {{/each}}
+    </script>
+
     <script src="js/bundle.js"></script>
   </body>
 </html>
